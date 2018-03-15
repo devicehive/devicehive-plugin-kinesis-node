@@ -8,19 +8,19 @@ This plugin allows you to stream data in Kinesis Data Streams and Firehose Deliv
  1. Start DeviceHive
  2. Create following .env file. **Replace username, password, plugin topic, localhost, AWS region, keys and streams** and set provider you want to use: **firehose** or **dataStreams**
 
-        ENVSEPARATOR=\_
-        plugin\_user\_login=username
-        plugin\_user\_password=password
-        plugin\_plugin\_topic=plugin topic
-        plugin\_device\_hive\_plugin\_ws\_endpoint=ws://localhost:3001
-        plugin\_device\_hive\_auth\_service\_api\_url=http://localhost:8090/dh/rest
-        kinesis\_provider=firehose
-        kinesis\_aws\_region=region
-        kinesis\_aws\_accessKeyId=access\_key\_id
-        kinesis\_aws\_secretAccessKey=secret\_access\_key
-        kinesis\_custom\_commandStreams=command\_streams
-        kinesis\_custom\_notificationStreams=notification\_streams
-        kinesis\_custom\_commandUpdatesStreams=command\_updates\_streams
+        ENVSEPARATOR=_
+        plugin_user_login=username
+        plugin_user_password=password
+        plugin_plugin_topic=plugin topic
+        plugin_device_hive_plugin_ws_endpoint=ws://localhost:3001
+        plugin_device_hive_auth_service_api_url=http://localhost:8090/dh/rest
+        kinesis_provider=firehose
+        kinesis_aws_region=region
+        kinesis_aws_accessKeyId=access_key_id
+        kinesis_aws_secretAccessKey=secret_access_key
+        kinesis_custom_commandStreams=command_streams
+        kinesis_custom_notificationStreams=notification_streams
+        kinesis_custom_commandUpdatesStreams=command_updates_streams
 
  3. Run `docker-compose up`
  4. Issue notification through DeviceHive
@@ -71,20 +71,20 @@ Example of configuration using environment variables:
 
         ENVSEPARATOR=_
         DEBUG=kinesisstreamprovider
-        plugin\_user\_login=dhadmin
-        plugin\_user\_password=dhadmin_#911
-        plugin\_plugin\_topic=plugin\_topic\_a28fcdee-02a1-4535-a97a-f37468461872
-        plugin\_device\_hive\_plugin\_ws\_endpoint=ws://192.168.152.174:3001
-        plugin\_device\_hive\_auth\_service\_api\_url=http://192.168.152.174:8090/dh/rest
-        plugin\_subscription\_group=kinesis\_plugin
-        kinesis\_aws\_region=us-east-2
-        kinesis\_aws\_accessKeyId=myAccessKey
-        kinesis\_aws\_secretAccessKey=mySecretAccessKey
-        kinesis\_custom\_buffering=true
-        kinesis\_custom\_commandStreams=stream-1, stream-2
-        kinesis\_custom\_notificationStreams=stream-3
-        kinesis\_custom\_commandUpdatesStreams=stream-1
-        kinesis\_custom\_bufferTimeout=10000
-        kinesis\_custom\_bufferSize=5
+        plugin_user_login=dhadmin
+        plugin_user_password=dhadmin_#911
+        plugin_plugin_topic=plugin_topic_a28fcdee-02a1-4535-a97a-f37468461872
+        plugin_device_hive_plugin_ws_endpoint=ws://192.168.152.174:3001
+        plugin_device_hive_auth_service_api_url=http://192.168.152.174:8090/dh/rest
+        plugin_subscription_group=kinesis_plugin
+        kinesis_aws_region=us-east-2
+        kinesis_aws_accessKeyId=myAccessKey
+        kinesis_aws_secretAccessKey=mySecretAccessKey
+        kinesis_custom_buffering=true
+        kinesis_custom_commandStreams=stream-1, stream-2
+        kinesis_custom_notificationStreams=stream-3
+        kinesis_custom_commandUpdatesStreams=stream-1
+        kinesis_custom_bufferTimeout=10000
+        kinesis_custom_bufferSize=5
         kinesis_provider=dataStreams
 To set config property using environment variable please use *kinesis* as prefix and defined ENVSEPARATOR for nesting.
