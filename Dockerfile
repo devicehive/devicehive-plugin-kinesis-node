@@ -17,6 +17,7 @@ COPY . .
 
 RUN apk update \
     && apk add --no-cache --virtual .gyp python make g++ \
+    && npm i \
     && npm cache clean --force \
     && apk del .gyp
 
