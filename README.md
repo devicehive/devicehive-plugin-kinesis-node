@@ -38,24 +38,24 @@ You can configure Kinesis part of plugin in two ways:
 <br />
 Config file example:
 
-	    {
-		  "provider": "firehose",
+    {
+       "provider": "firehose",
 
-		  "aws": {
-		    "region": "",
-			 "accessKeyId": "",
-			 "secretAccessKey": ""
-		  },
+       "aws": {
+          "region": "",
+          "accessKeyId": "",
+          "secretAccessKey": ""
+       },
 
-		  "custom": {
-		    "buffering": true,
-			 "bufferSize": 10,
-			 "bufferTimeout": 1000,
-			 "commandStreams": "stream-1, stream-2",
-			 "notificationStreams": "stream-3",
-			 "commandUpdatesStreams": "stream-4"
-		  }
-		}
+       "custom": {
+          "buffering": true,
+          "bufferSize": 10,
+          "bufferTimeout": 1000,
+          "commandStreams": "stream-1, stream-2",
+          "notificationStreams": "stream-3",
+          "commandUpdatesStreams": "stream-4"
+       }
+    }
 
  - `provider` — String, can be *firehose* for Kinesis Firehose Delivery Streams or *dataStreams* for Kinesis Data Streams
  - `aws` — Your AWS configuration, please refer [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Kinesis.html#constructor-property) or [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Firehose.html#constructor-property) for details (both are the same)
