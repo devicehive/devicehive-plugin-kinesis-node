@@ -57,12 +57,12 @@ Config file example:
        }
     }
 
- - `provider` — String, can be *firehose* for Kinesis Firehose Delivery Streams or *dataStreams* for Kinesis Data Streams
+ - `provider` — String, firehose by default; can be *firehose* for Kinesis Firehose Delivery Streams or *dataStreams* for Kinesis Data Streams
  - `aws` — Your AWS configuration, please refer [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Kinesis.html#constructor-property) or [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Firehose.html#constructor-property) for details (both are the same)
  - `custom` — Object of custom configs
-	 - `buffering` — Boolean, if true will buffer messages instead of immediate put. Messages will be sent as single batch by reaching max buffer size or buffer timeout
-	 - `bufferSize` — Number, max amount of messages for one stream buffer must reach to trigger put to stream
-	 - `bufferTimeout` — Number, timeout that must occur to trigger put to stream
+	 - `buffering` — Boolean, true by default; if true will buffer messages instead of immediate put. Messages will be sent as single batch by reaching max buffer size or buffer timeout
+	 - `bufferSize` — Number, 10 by default; max amount of messages for one stream buffer must reach to trigger put to stream
+	 - `bufferTimeout` — Number, 1000 by default; timeout in ms which must occur to trigger put to stream
 	 - `commandStreams` — Comma separated strings, streams that will be used for putting commands
 	 - `notificationStreams` — Array or comma separated strings, streams that will be used for putting notifications
 	 - `commandUpdatesStreams` — Array or comma separated strings, streams that will be used for putting command updates
