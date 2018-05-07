@@ -74,8 +74,8 @@ Example of configuration using environment variables:
         plugin_user_login=myDHLogin
         plugin_user_password=myDHPassword
         plugin_plugin_topic=plugin_topic_a28fcdee-02a1-4535-a97a-f37468461872
-        plugin_device_hive_plugin_ws_endpoint=ws://192.168.152.174:3001
-        plugin_device_hive_auth_service_api_url=http://192.168.152.174:8090/dh/rest
+        plugin_device_hive_plugin_ws_endpoint=ws://localhost:3001
+        plugin_device_hive_auth_service_api_url=http://localhost:8090/dh/rest
         plugin_subscription_group=kinesis_plugin
         kinesis_aws_region=us-east-2
         kinesis_aws_accessKeyId=myAccessKey
