@@ -6,9 +6,11 @@ This plugin allows you to stream data in Kinesis Data Streams and Firehose Deliv
 # How it works
 
  1. Start DeviceHive
- 2. Create following .env file. **Replace access and refresh tokens (or username and password), plugin topic, localhost, AWS region, keys and streams** and set provider you want to use: **firehose** or **dataStreams**
+ 2. Create following .env file. **For authentication set access token OR refresh token of plugin (or user access and refresh token, or name and password), please see [this doc](https://github.com/devicehive/devicehive-plugin-core-node#configuration). Then set your plugin topic, API URLs and endpoints, AWS region, keys and streams** and set provider you want to use: **firehose** or **dataStreams**
 
         ENVSEPARATOR=_
+        plugin_access_token=plugin.JWT.accessToken        
+        plugin_refresh_token=plugin.JWT.refreshToken
         plugin_user_access_token=your.JWT.accessToken
         plugin_user_refresh_token=your.JWT.refreshToken
         plugin_user_login=username
@@ -80,11 +82,9 @@ Example of configuration using environment variables:
 
         ENVSEPARATOR=_
         DEBUG=kinesisstreamprovider
-        plugin_user_access_token=your.JWT.accessToken
-        plugin_user_refresh_token=your.JWT.refreshToken
+        plugin_refresh_token=plugin.JWT.refreshToken
         plugin_plugin_topic=plugin_topic_a28fcdee-02a1-4535-a97a-f37468461872
         plugin_device_hive_plugin_ws_endpoint=ws://localhost:3001
-        plugin_device_hive_auth_service_api_url=http://localhost:8090/dh/rest
         plugin_subscription_group=kinesis_plugin
         kinesis_aws_region=us-east-2
         kinesis_aws_accessKeyId=myAccessKey
