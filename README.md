@@ -6,7 +6,7 @@ This plugin allows you to stream data in Kinesis Data Streams and Firehose Deliv
 # How it works
 
  1. Start DeviceHive
- 2. Create following .env file. **For authentication set access token OR refresh token of plugin (or user access and refresh token, or name and password), please see [this doc](https://github.com/devicehive/devicehive-plugin-core-node#configuration). Then set your plugin topic, API URLs and endpoints, AWS region, keys and streams** and set provider you want to use: **firehose** or **dataStreams**
+ 2. Create following .env file. **For authentication set access token OR refresh token of plugin (or user access and refresh token, or name and password), please see [this doc](https://github.com/devicehive/devicehive-plugin-core-node#configuration). Then set your plugin topic, API URLs and endpoints, AWS region, keys and streams** and set data destination you want to use: **direct_put** or **kinesis_stream**
 
         ENVSEPARATOR=_
         plugin_plugin_access_token=plugin.JWT.accessToken        
@@ -18,7 +18,7 @@ This plugin allows you to stream data in Kinesis Data Streams and Firehose Deliv
         plugin_plugin_topic=plugin topic
         plugin_device_hive_plugin_ws_endpoint=ws://localhost:3001
         plugin_device_hive_auth_service_api_url=http://localhost:8090/dh/rest
-        kinesis_provider=firehose
+        kinesis_dataDestination=direct_put
         kinesis_aws_region=region
         kinesis_aws_accessKeyId=access_key_id
         kinesis_aws_secretAccessKey=secret_access_key
@@ -50,7 +50,7 @@ You can configure Kinesis part of plugin in two ways:
 Config file example:
 
     {
-       "provider": "firehose",
+       "dataDestination": "direct_put",
 
        "aws": {
           "region": "",
@@ -68,7 +68,7 @@ Config file example:
        }
     }
 
- - `provider` — String, firehose by default; can be *firehose* for Kinesis Firehose Delivery Streams or *dataStreams* for Kinesis Data Streams
+ - `dataDestination` — String, *direct_put* by default; can be *direct_put* for direct put to Kinesis Firehose Delivery Streams or *kinesis_stream* for Kinesis Data Streams
  - `aws` — Your AWS configuration, please refer [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Kinesis.html#constructor-property) or [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Firehose.html#constructor-property) for details (both are the same)
  - `custom` — Object of custom configs
 	 - `buffering` — Boolean, true by default; if true will buffer messages instead of immediate put. Messages will be sent as single batch by reaching max buffer size or buffer timeout
@@ -81,7 +81,7 @@ Config file example:
 Example of configuration using environment variables:
 
         ENVSEPARATOR=_
-        DEBUG=kinesisstreamprovider
+        DEBUG=kinesismodule
         plugin_plugin_refresh_token=plugin.JWT.refreshToken
         plugin_plugin_topic=plugin_topic_a28fcdee-02a1-4535-a97a-f37468461872
         plugin_device_hive_plugin_ws_endpoint=ws://localhost:3001
@@ -95,5 +95,6 @@ Example of configuration using environment variables:
         kinesis_custom_commandUpdatesStreams=stream-1
         kinesis_custom_bufferTimeout=10000
         kinesis_custom_bufferSize=5
-        kinesis_provider=dataStreams
+        kinesis_dataDestination=direct_put
+
 To set config property using environment variable please use *kinesis* as prefix and defined ENVSEPARATOR for nesting.

@@ -1,5 +1,5 @@
 {
-  "provider": "firehose",
+  "dataDestination": "direct_put",
 
   "aws": {
     "region": "",
