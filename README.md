@@ -1,12 +1,15 @@
 # devicehive-plugin-kinesis-node
 DeviceHive Kinesis Streaming plugin written in Node.js
 # Overview
-This plugin allows you to stream data in Kinesis Data Streams and Firehose Delivery Streams as it goes through DeviceHive.
+This plugin allows you to stream your time series data to Kinesis [Data Streams](https://aws.amazon.com/kinesis/data-streams/) and [Data Firehose](https://aws.amazon.com/kinesis/data-firehose/) as it goes through DeviceHive.
 
 # How it works
 
- 1. Start DeviceHive
- 2. Create following .env file. **For authentication set access token OR refresh token of plugin (or user access and refresh token, or name and password), please see [this doc](https://github.com/devicehive/devicehive-plugin-core-node#configuration). Then set your plugin topic, API URLs and endpoints, AWS region, keys and streams** and set data destination you want to use: **direct_put** or **kinesis_stream**
+ 1. Start DeviceHive. Detailed instructions could be found [here](https://github.com/devicehive/devicehive-docker/tree/master/rdbms-image).
+ 2. Set up and configure your Kinesis streams.
+ 3. Create **.env** file with following configs and specify type of the [destination stream](https://docs.aws.amazon.com/firehose/latest/dev/create-name.html): **direct_put** or **kinesis_stream**. 
+ Plugin authentication process and options are described [here](https://github.com/devicehive/devicehive-plugin-core-node/blob/master/README.md#plugin-authentication).
+ To start plugin you also have to specify plugin topic, DeviceHive REST or Websocket API endpoints, AWS region, access and secret keys and kinesis stream names. 
 
         ENVSEPARATOR=_
         plugin_plugin_access_token=plugin.JWT.accessToken        
@@ -26,31 +29,33 @@ This plugin allows you to stream data in Kinesis Data Streams and Firehose Deliv
         kinesis_custom_notificationStreams=notification_streams
         kinesis_custom_commandUpdatesStreams=command_updates_streams
 
- 3. Run `docker-compose up`
- 4. Issue notification through DeviceHive
- 5. Observe data in your AWS monitoring console
+ 4. Run `docker-compose up`.
+ 5. Issue notification through DeviceHive.
+ 6. Observe data in your destination source.
 
  # Manual run (without Docker)
 
- 1. Start DeviceHive
- 2. Set up your Kinesis streams
- 3. Configure your plugin and Kinesis connections with *plugin/plugin-config.json* and *kinesisConfig/config.json* (see [Configuration](#configuration))
- 4. Execute: `npm start` to run plugin
+ 1. Start DeviceHive.
+ 2. Set up and configure your Kinesis streams.
+ 3. Configure your plugin and Kinesis connections inside *plugin/plugin-config.json* and *kinesisConfig/config.json* (see [Configuration](#configuration)).
+ 4. Execute: `npm start` to run plugin.
 
 # Configuration
+
 ## Plugin
 Plugin part of configuration you can find [here](https://github.com/devicehive/devicehive-plugin-core-node#configuration).
-## Kinesis
-You can configure Kinesis part of plugin in two ways:
 
- - Share `./kinesisConfig` directory as volume with docker container
- - Set configs through environment variables
+## Kinesis
+You can configure Kinesis connection in two ways:
+
+ - Share `./kinesisConfig` directory as volume with docker container;
+ - Set configs through environment variables;
 
 <br />
 Config file example:
 
     {
-       "dataDestination": "direct_put",
+       "dataDestination": "kinesis_stream",
 
        "aws": {
           "region": "",
@@ -68,17 +73,17 @@ Config file example:
        }
     }
 
- - `dataDestination` — String, *direct_put* by default; can be *direct_put* for direct put to Kinesis Firehose Delivery Streams or *kinesis_stream* for Kinesis Data Streams
- - `aws` — Your AWS configuration, please refer [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Kinesis.html#constructor-property) or [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Firehose.html#constructor-property) for details (both are the same)
- - `custom` — Object of custom configs
-	 - `buffering` — Boolean, true by default; if true will buffer messages instead of immediate put. Messages will be sent as single batch by reaching max buffer size or buffer timeout
-	 - `bufferSize` — Number, 10 by default; max amount of messages for one stream buffer must reach to trigger put to stream
-	 - `bufferTimeout` — Number, 1000 by default; timeout in ms which must occur to trigger put to stream
-	 - `commandStreams` — Comma separated strings, streams that will be used for putting commands
-	 - `notificationStreams` — Array or comma separated strings, streams that will be used for putting notifications
-	 - `commandUpdatesStreams` — Array or comma separated strings, streams that will be used for putting command updates
+ - `dataDestination` — String, *direct_put* by default; can be *direct_put* for direct put to Kinesis Firehose Delivery Streams or *kinesis_stream* for Kinesis Data Streams;
+ - `aws` — Your AWS configuration, more details can be found [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Kinesis.html#constructor-property) or [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Firehose.html#constructor-property) for details (both are the same);
+ - `custom` — Object of custom configs:
+	 - `buffering` — Boolean, true by default; if true will buffer messages instead of immediate put. Messages will be sent as single batch by reaching max buffer size or buffer timeout;
+	 - `bufferSize` — Number, 10 by default; max amount of messages for one stream buffer must reach to trigger put to stream;
+	 - `bufferTimeout` — Number, 1000 by default; timeout in ms which must occur to trigger put to stream;
+	 - `commandStreams` — Comma separated strings, streams that will be used for putting commands;
+	 - `notificationStreams` — Array or comma separated strings, streams that will be used for putting notifications;
+	 - `commandUpdatesStreams` — Array or comma separated strings, streams that will be used for putting command updates.
 
-Example of configuration using environment variables:
+Example configuration via environment variables:
 
         ENVSEPARATOR=_
         DEBUG=kinesismodule
@@ -97,4 +102,4 @@ Example of configuration using environment variables:
         kinesis_custom_bufferSize=5
         kinesis_dataDestination=direct_put
 
-To set config property using environment variable please use *kinesis* as prefix and defined ENVSEPARATOR for nesting.
+In order to configure Kinesis property using environment variables please use **kinesis** as a prefix and defined **ENVSEPARATOR** for nesting.
