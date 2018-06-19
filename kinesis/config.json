@@ -1,5 +1,5 @@
 {
-  "dataDestination": "direct_put",
+  "dataDestination": "kinesis_stream",
 
   "aws": {
     "region": "",

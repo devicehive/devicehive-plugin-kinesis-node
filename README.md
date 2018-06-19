@@ -21,7 +21,7 @@ This plugin allows you to stream your time series data to Kinesis [Data Streams]
         plugin_plugin_topic=plugin topic
         plugin_device_hive_plugin_ws_endpoint=ws://localhost:3001
         plugin_device_hive_auth_service_api_url=http://localhost:8090/dh/rest
-        kinesis_dataDestination=direct_put
+        kinesis_dataDestination=kinesis_stream
         kinesis_aws_region=region
         kinesis_aws_accessKeyId=access_key_id
         kinesis_aws_secretAccessKey=secret_access_key
@@ -73,8 +73,8 @@ Config file example:
        }
     }
 
- - `dataDestination` — String, *direct_put* by default; can be *direct_put* for direct put to Kinesis Firehose Delivery Streams or *kinesis_stream* for Kinesis Data Streams;
- - `aws` — Your AWS configuration, more details can be found [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Kinesis.html#constructor-property) or [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Firehose.html#constructor-property) for details (both are the same);
+ - `dataDestination` — String, *kinesis_stream* by default; can be *direct_put* for direct put to Kinesis Firehose Delivery Streams or *kinesis_stream* for Kinesis Data Streams;
+ - `aws` — Your AWS configuration, more details can be found [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Kinesis.html#constructor-property) or [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Firehose.html#constructor-property);
  - `custom` — Object of custom configs:
 	 - `buffering` — Boolean, true by default; if true will buffer messages instead of immediate put. Messages will be sent as single batch by reaching max buffer size or buffer timeout;
 	 - `bufferSize` — Number, 10 by default; max amount of messages for one stream buffer must reach to trigger put to stream;
@@ -100,6 +100,6 @@ Example configuration via environment variables:
         kinesis_custom_commandUpdatesStreams=stream-1
         kinesis_custom_bufferTimeout=10000
         kinesis_custom_bufferSize=5
-        kinesis_dataDestination=direct_put
+        kinesis_dataDestination=kinesis_stream
 
 In order to configure Kinesis property using environment variables please use **kinesis** as a prefix and defined **ENVSEPARATOR** for nesting.
