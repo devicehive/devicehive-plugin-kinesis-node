@@ -1,5 +1,5 @@
 {
-  "provider": "dataStreams",
+  "dataDestination": "kinesis_stream",
 
   "aws": {
     "region": "",
