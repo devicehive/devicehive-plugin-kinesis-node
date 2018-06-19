@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk');
 const merge = require('lodash.merge');
-const debug = require('debug')('kinesisstreamprovider');
+const debug = require('debug')('kinesismodule');
 
 const KinesisUtils = require('./lib/KinesisUtils');
 const AWSFirehoseProvider = require('./firehose');
@@ -21,12 +21,12 @@ module.exports = {
 
         let provider = null;
 
-        switch (userConfig.provider) {
-            case 'firehose':
+        switch (userConfig.dataDestination) {
+            case 'direct_put':
                 const awsFirehose = new AWS.Firehose(config.aws);
                 provider = new AWSFirehoseProvider(awsFirehose, config.custom);
                 break;
-            case 'dataStreams':
+            case 'kinesis_stream':
                 const awsKinesis = new AWS.Kinesis(config.aws);
                 provider = new AWSKinesisDataStreamsProvider(awsKinesis, config.custom);
                 break;
