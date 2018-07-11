@@ -41,6 +41,8 @@ This plugin allows you to stream your time series data to Kinesis [Data Streams]
  4. Execute: `npm start` to run plugin.
 
 # Configuration
+`plugin/plugin-config.json` — is the main config file for plugin part.
+`kinesisConfig/config.json` — is the main config file for AWS part.
 
 ## Plugin
 Plugin part of configuration you can find [here](https://github.com/devicehive/devicehive-plugin-core-node#configuration).
