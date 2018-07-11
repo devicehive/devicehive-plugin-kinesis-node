@@ -14,7 +14,7 @@ class KinesisPluginService extends PluginService {
         this._provider = kinesis.createProvider(this._kinesisConfig);
 
         if (!this._provider) {
-            this.onError('AWS Stream Provider has not been initialized, please check "provider" property in configuration');
+            this.onError('AWS Stream Provider has not been initialized, please check "dataDestination" property in configuration');
         } else {
             this._provider.onPut((err, res, stream) => {
                 if (err) {
